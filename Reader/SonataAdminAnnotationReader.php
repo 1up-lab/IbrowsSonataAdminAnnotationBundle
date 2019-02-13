@@ -175,6 +175,10 @@ class SonataAdminAnnotationReader extends AnnotationReader implements SonataAdmi
 
         $this->invokeCallbacks($entity, $this->getFormMapperCallbacks($entity), array($formMapper));
 
+        if ($formMapper->hasOpenTab()) {
+            $formMapper->end();
+        }
+
         foreach ($this->getFormReorderAnnotations($entity) as $formReorderAnnotation) {
             $reorderWith = $formReorderAnnotation->getWith() ?: $formMapper->getAdmin()->getLabel();
             $formMapper->with($reorderWith);
